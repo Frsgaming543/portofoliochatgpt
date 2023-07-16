@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ICONS CDN FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Portofolio</title>
   <style>
     /* Global styles */
@@ -220,85 +222,101 @@
     /* Skill section styles */
     .skill-section {
       background-color: #ffffff;
+      
+      padding: 20px;
+    }
+    
+    .skill-section h2 {
       text-align: center;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap; /* Baris ini ditambahkan */
+      margin-bottom: 20px;
     }
     
-    .box {
-      position: relative;
-      margin: 20px;
-      width: 200px;
-      height: 200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .html {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 280px;
+      cursor: pointer;
     }
-
-    .box .text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      text-align: center;
-      color: #333;
+    
+    .html img {
+      width: 10%;
+      height: 10%;
+      filter: invert(91%) sepia(5%) saturate(45%) hue-rotate(131deg) brightness(89%) contrast(90%);
     }
-
-    .box .text h2 {
-      font-size: 28px;
-      font-weight: 400;
-      letter-spacing: 1px;
+    
+    .html:hover img {
+      filter: none;
     }
-
-    .box .text small {
-      font-size: 18px;
-      display: block;
+    
+    .tailwind {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 280px;
+      cursor: pointer;
     }
-
-    .circle {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    
+    .tailwind img {
+      width: 10%;
+      height: 10%;
+      filter: invert(91%) sepia(5%) saturate(45%) hue-rotate(131deg) brightness(89%) contrast(90%);
     }
-
-    .circle .points {
-      width: 3px;
-      height: 15px;
-      background: #0007;
-      position: absolute;
-      border-radius: 3px;
-      transform: rotate(calc(var(--i)*var(--rot))) translateY(-80px);
-      
+    
+    .tailwind:hover img {
+      filter: none;
     }
-
-    .points.marked {
-      animation: glow 0.04s linear forwards;
-      animation-delay: calc(var(--i)*0.05s);
+ 
+    .react {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 280px;
+      cursor: pointer;
     }
-
-    @keyframes glow {
-      0% {
-        background: #0007;
-        box-shadow: none;
-      }
-      100% {
-        background: var(--bgColor);
-        box-shadow: 0 0 10px var(--bgColor);
-      }
-    } 
-
-    /* Perubahan untuk tampilan di perangkat ponsel */
-    @media (max-width: 480px) {
-      .box {
-        margin: 10px;
-      }
-      body {
-        flex-direction: column;
-      }
+    
+    .react img {
+      width: 10%;
+      height: 10%;
+      filter: invert(91%) sepia(5%) saturate(45%) hue-rotate(131deg) brightness(89%) contrast(90%);
+    }
+    
+    .react:hover img {
+      filter: none;
+    }
+    
+    .php {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 280px;
+      cursor: pointer;
+    }
+    
+    .php img {
+      width: 10%;
+      height: 10%;
+      filter: invert(91%) sepia(5%) saturate(45%) hue-rotate(131deg) brightness(89%) contrast(90%);
+    }
+    
+    .php:hover img {
+      filter: none;
     }
     
     /* testimonial */
@@ -409,7 +427,9 @@
       background-color: #333333;
       color: #ffffff;
     }
-
+    
+    /*Dark Mode*/
+    
     /* Media queries */
     @media (max-width: 768px) {
       .navbar ul {
@@ -451,7 +471,7 @@
 <body>
   <nav id="navbar" class="navbar">
     <div class="logo">
-      <h2>Logo</h2>
+      <h2>Mr.Programmer</h2>
     </div>
     <ul>
       <li><a href="#home">Home</a></li>
@@ -507,25 +527,23 @@
   </div>
 
   <section id="skills" class="skill-section">
-    <div class="box">
-      <div class="circle" data-dots="70" data-percent="90" style="--bgColor: #ff0070"></div>
-      <div class="text">
-        <h2>90%</h2>
-        <small>HTML</small>
+    <h2>Skills</h2>
+    <div class="logo">
+      <div class="html">
+        <img src="html.svg.png" alt="html" />
+       <p>Excepteur reprehenderit labore do id nostrud laborum. Ullamco ea excepteur et eiusmod. Sunt ipsum sit magna pariatur adipisicing quis eu.</p>  
       </div>
-    </div>
-    <div class="box">
-      <div class="circle" data-dots="70" data-percent="70" style="--bgColor: #0f0"></div>
-      <div class="text">
-        <h2>70%</h2>
-        <small>JavaScript</small>
+      <div class="tailwind">
+        <img src="tailwind.com.png" alt="tailwind" />
+        <p>Excepteur reprehenderit labore do id nostrud laborum. Ullamco ea excepteur et eiusmod. Sunt ipsum sit magna pariatur adipisicing quis eu.</p>
       </div>
-    </div>
-    <div class="box">
-      <div class="circle" data-dots="70" data-percent="60" style="--bgColor: #52a8ff"></div>
-      <div class="text">
-        <h2>60%</h2>
-        <small>PHP</small>
+      <div class="react">
+        <img src="React.svg.png" alt="tailwind" />
+        <p>Excepteur reprehenderit labore do id nostrud laborum. Ullamco ea excepteur et eiusmod. Sunt ipsum sit magna pariatur adipisicing quis eu.</p>
+      </div>
+      <div class="php">
+        <img src="PHP.svg.png" alt="tailwind" />
+        <p>Excepteur reprehenderit labore do id nostrud laborum. Ullamco ea excepteur et eiusmod. Sunt ipsum sit magna pariatur adipisicing quis eu.</p>
       </div>
     </div>
   </section>
@@ -536,7 +554,7 @@
   </div>
   <div class="testimonial-container" id="testimoni">
     <div class="testimonial-content">
-      <img class="testimonial-image" src="john-doe.jpg" alt="John Doe">
+      <img class="testimonial-image" src="profile.jpg" alt="John Doe">
       <div class="testimonial-name">John Doe</div>
       <div class="testimonial-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tristique faucibus justo, at iaculis tortor interdum sed."</div>
       <div class="social-media-icons">
@@ -549,7 +567,7 @@
 
   <div class="testimonial-container">
     <div class="testimonial-content">
-      <img class="testimonial-image" src="jane-smith.jpg" alt="Jane Smith">
+      <img class="testimonial-image" src="profile.jpg" alt="Jane Smith">
       <div class="testimonial-name">Jane Smith</div>
       <div class="testimonial-description">"Duis fringilla magna et velit euismod, sed suscipit metus aliquam. Mauris non metus in dui commodo fringilla."</div>
       <div class="social-media-icons">
@@ -562,7 +580,7 @@
 
   <div class="testimonial-container">
     <div class="testimonial-content">
-      <img class="testimonial-image" src="david-johnson.jpg" alt="David Johnson">
+      <img class="testimonial-image" src="profile.jpg" alt="David Johnson">
       <div class="testimonial-name">David Johnson</div>
       <div class="testimonial-description">"Vivamus dictum neque sit amet purus tempus, sit amet eleifend risus aliquet. Suspendisse nec felis tincidunt, lobortis erat non, auctor mauris."</div>
       <div class="social-media-icons">
@@ -576,10 +594,10 @@
 
   <section id="contact" class="contact-section">
     <h2>Contact</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" required></textarea>
+    <form onsubmit="sendEmail(); reset(); return false;">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
   </section>
@@ -667,6 +685,7 @@ circles.forEach(elem => {
 })
     </script>
       <script>
+      //scroll transparent navbar
     window.addEventListener("scroll", function () {
       var navbar = document.getElementById("navbar");
       if (window.scrollY > 0) {
@@ -675,6 +694,31 @@ circles.forEach(elem => {
         navbar.classList.remove("transparent");
       }
     });
+    //scroll transparent humberger
+    window.addEventListener("scroll", function () {
+      var navbar = document.getElementById("line");
+      if (window.scrollY > 0) {
+        navbar.classList.add("transparent");
+      } else {
+        navbar.classList.remove("transparent");
+      }
+    });
+  </script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <script>
+    function sendEmail(){
+      Email.send({
+      Host : "smtp.gmail.com",
+      Username : "frsgaming589@gmail.com",
+      Password : "frsgaming_134",
+      To : 'frsgaming589@gmail.com',
+      From : document.getElementById("email").value,
+      Subject : "New Contact Form Enquiry",
+      Body : "And this is the body",
+        }).then(
+          message => alert(Anda Berhasil Mengirimkan Pesan Anda Ke Email Pemilik Website Ini)
+      );
+    }
   </script>
 </body>
 </html>
