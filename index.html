@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- ICONS CDN FONTAWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
   <title>Portofolio</title>
   <style>
     /* Global styles */
@@ -419,6 +420,12 @@
       color: #ffffff;
       cursor: pointer;
     }
+    
+    .sentmessage {
+      background-color: #f2f7ff;
+      width: 50%;
+      height: 50%;
+    }
 
     /* Footer styles */
     .footer {
@@ -595,10 +602,10 @@
   <section id="contact" class="contact-section">
     <h2>Contact</h2>
     <form onsubmit="sendEmail(); reset(); return false;">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
+      <input id="name" type="text" name="name" placeholder="Your Name" required>
+      <input id="email" type="email" name="email" placeholder="Your Email" required>
       <textarea id="message" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
+      <button id="submit" type="button" onclick="SendEmail()">Send Message</button>
     </form>
   </section>
 
@@ -694,31 +701,24 @@ circles.forEach(elem => {
         navbar.classList.remove("transparent");
       }
     });
-    //scroll transparent humberger
-    window.addEventListener("scroll", function () {
-      var navbar = document.getElementById("line");
-      if (window.scrollY > 0) {
-        navbar.classList.add("transparent");
-      } else {
-        navbar.classList.remove("transparent");
-      }
-    });
   </script>
-  <script src="https://smtpjs.com/v3/smtp.js"></script>
   <script>
-    function sendEmail(){
-      Email.send({
-      Host : "smtp.gmail.com",
-      Username : "frsgaming589@gmail.com",
-      Password : "frsgaming_134",
-      To : 'frsgaming589@gmail.com',
-      From : document.getElementById("email").value,
-      Subject : "New Contact Form Enquiry",
-      Body : "And this is the body",
+  function SendEmail(){
+        Email.send({
+          SecureToken : "68fbbd6a-0008-4df3-8460-36cf1f4d1921",
+          To : 'frsgaming589@gmail.com',
+          From : "frsgaming589@gmail.com",
+          Subject : document.getElementById("message").value,
+          Body : "<div class='sentmessage'>"
+          + "<h1>Data Message</h1>"
+          + "Name: " + document.getElementById("name").value
+          + "<br> Email: " + document.getElementById("email").value
+          + "<br> Message: " + document.getElementById("message").value
+          + "</div>"
         }).then(
-          message => alert(Anda Berhasil Mengirimkan Pesan Anda Ke Email Pemilik Website Ini)
-      );
-    }
+        message => alert(message)
+        );
+  }
   </script>
 </body>
 </html>
