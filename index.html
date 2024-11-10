@@ -503,8 +503,7 @@
 
   <section id="about" class="about-section">
     <h2>About</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec convallis justo ac commodo rutrum. Morbi
-      efficitur risus sit amet neque blandit, in fring     gerit nulla dictum. Suspendisse vitae placerat mauris. Sed vel tempor tellus. Fusce finibus ullamcorper risus, id convallis neque aliquam nec. Sed faucibus augue quis nunc placerat, nec viverra ex lobortis.</p>
+    <p>Mr. Programmer menyediakan layanan lengkap untuk pengembangan web, termasuk website siap pakai, perbaikan kode, penjualan source code, dan kelas pemrograman untuk pemula. Kami hadir untuk memudahkan Anda mengembangkan website berkualitas dan belajar pemrograman dari dasar dengan panduan praktis dan terpercaya.</p>
   </section>
   
   <section id="projects" class="project-section">
@@ -538,19 +537,19 @@
     <div class="logo">
       <div class="html">
         <img src="html.svg.png" alt="html" />
-       <p>Excepteur reprehenderit labore do id nostrud laborum. Ullamco ea excepteur et eiusmod. Sunt ipsum sit magna pariatur adipisicing quis eu.</p>  
+       <p>HTML adalah fondasi dari setiap website yang saya buat. Dengan pemahaman yang kuat dalam HTML, saya dapat membangun struktur halaman yang rapi dan semantik, memungkinkan konten untuk mudah dibaca dan diindeks oleh mesin pencari.</p>  
       </div>
       <div class="tailwind">
         <img src="tailwind.com.png" alt="tailwind" />
-        <p>Excepteur reprehenderit labore do id nostrud laborum. Ullamco ea excepteur et eiusmod. Sunt ipsum sit magna pariatur adipisicing quis eu.</p>
+        <p>Menggunakan Tailwind CSS, saya mampu mengembangkan desain yang modern dan responsif dengan efisien. Tailwind memungkinkan saya untuk menata antarmuka dengan fleksibel dan mempercepat proses desain melalui pendekatan utility-first.</p>
       </div>
       <div class="react">
         <img src="React.svg.png" alt="tailwind" />
-        <p>Excepteur reprehenderit labore do id nostrud laborum. Ullamco ea excepteur et eiusmod. Sunt ipsum sit magna pariatur adipisicing quis eu.</p>
+        <p>React adalah framework yang saya gunakan untuk membangun antarmuka pengguna yang dinamis dan interaktif. Dengan React, saya bisa membuat komponen yang efisien, mudah di-maintain, dan mampu menghadirkan pengalaman pengguna yang optimal.</p>
       </div>
       <div class="php">
         <img src="PHP.svg.png" alt="tailwind" />
-        <p>Excepteur reprehenderit labore do id nostrud laborum. Ullamco ea excepteur et eiusmod. Sunt ipsum sit magna pariatur adipisicing quis eu.</p>
+        <p>PHP memungkinkan saya untuk membangun backend yang kuat untuk aplikasi web. Dengan PHP, saya dapat menangani logika server-side, menghubungkan aplikasi ke basis data, serta mengelola berbagai aspek fungsionalitas yang dibutuhkan dalam aplikasi dinamis.</p>
       </div>
     </div>
   </section>
@@ -601,11 +600,11 @@
 
   <section id="contact" class="contact-section">
     <h2>Contact</h2>
-    <form onsubmit="sendEmail(); reset(); return false;">
+    <form id="contactForm">
       <input id="name" type="text" name="name" placeholder="Your Name" required>
       <input id="email" type="email" name="email" placeholder="Your Email" required>
       <textarea id="message" placeholder="Your Message" required></textarea>
-      <button id="submit" type="button" onclick="SendEmail()">Send Message</button>
+      <button id="submit" type="submit">Send Message</button>
     </form>
   </section>
 
@@ -702,7 +701,34 @@ circles.forEach(elem => {
       }
     });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
+        (function(){
+            emailjs.init("6VZ09VpJKRpVlD8qY"); // Ganti dengan User ID dari EmailJS
+        })();
+
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah submit form secara default
+            
+            // Ambil data dari form
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+
+            // Kirim email menggunakan EmailJS
+            emailjs.send("service_n9yfctp", "template_uoikvbs", {
+                from_name: name,
+                from_email: email,
+                message: message
+            }).then(function(response) {
+                alert("Pesan berhasil dikirim!");
+            }, function(error) {
+                alert("Pesan gagal dikirim. Coba lagi.");
+                console.error("Error:", error);
+            });
+        });
+    </script>
+  <!--<script>
   function SendEmail(){
         Email.send({
           SecureToken : "68fbbd6a-0008-4df3-8460-36cf1f4d1921",
@@ -719,6 +745,6 @@ circles.forEach(elem => {
         message => alert(message)
         );
   }
-  </script>
+  </script>-->
 </body>
 </html>
