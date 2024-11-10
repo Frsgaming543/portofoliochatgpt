@@ -1,23 +1,763 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Kirim Email</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ICONS CDN FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <title>Portofolio</title>
+  <style>
+    /* Global styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: #333333;
+      background-color: #ffffff;
+    }
+    
+    #home {
+      background-color: #f2f7ff;
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background-color: #ffffff;
+      transition: background-color 0.3s ease;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    nav.transparent {
+      background-color: rgba(255,255,255,0.6);
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+    }
+
+    .navbar ul li {
+      margin-left: 20px;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #333333;
+    }
+
+    /* Hamburger styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger .line {
+      width: 30px;
+      height: 3px;
+      background-color: #333333;
+      margin: 3px 0;
+    }
+    
+    /* Img */
+    .img {
+      width: 45%;
+      height: 20%;
+      z-index: 0;
+      margin-top: -40px;
+    }
+
+    /* Typing styles */
+    .typing-container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .typing-container h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .typing-container button {
+      padding: 10px 20px;
+      background-color: #333333;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* About section styles */
+    .about-section {
+      background-color: #f7f7f7;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-section h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .about-section p {
+      margin-bottom: 20px;
+    }
+    .about-section {
+      background-color: #ffffff;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .about-section h2 {
+      font-size: 24px;
+      color: #333333;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    /* Project section styles */
+
+    .project-section {
+      background-color: #f2f7ff;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .project-section h2 {
+      margin-bottom: 20px;
+    }
+
+    .project-box {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 280px;
+      cursor: pointer;
+    }
+
+    .project-box img {
+      width: 100%;
+      margin-bottom: 5px;
+      border-radius: 10px;
+    }
+
+    .project-box h3 {
+      font-size: 20px;
+      color:#333333;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .project-box p {
+      margin-bottom: 20px;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+    }
+
+    .popup-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .popup-content h3 {
+      font-size: 24px;
+      color: #333333;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .popup-content p {
+      color: #666666;
+      margin-bottom: 20px;
+    }
+    
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      color: #333333;
+      cursor: pointer;
+    }
+    
+    /* Skill section styles */
+    .skill-section {
+      background-color: #ffffff;
+      
+      padding: 20px;
+    }
+    
+    .skill-section h2 {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap; /* Baris ini ditambahkan */
+      margin-bottom: 20px;
+    }
+    
+    .html {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 280px;
+      cursor: pointer;
+    }
+    
+    .html img {
+      width: 10%;
+      height: 10%;
+      filter: invert(91%) sepia(5%) saturate(45%) hue-rotate(131deg) brightness(89%) contrast(90%);
+    }
+    
+    .html:hover img {
+      filter: none;
+    }
+    
+    .tailwind {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 280px;
+      cursor: pointer;
+    }
+    
+    .tailwind img {
+      width: 10%;
+      height: 10%;
+      filter: invert(91%) sepia(5%) saturate(45%) hue-rotate(131deg) brightness(89%) contrast(90%);
+    }
+    
+    .tailwind:hover img {
+      filter: none;
+    }
+ 
+    .react {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 280px;
+      cursor: pointer;
+    }
+    
+    .react img {
+      width: 10%;
+      height: 10%;
+      filter: invert(91%) sepia(5%) saturate(45%) hue-rotate(131deg) brightness(89%) contrast(90%);
+    }
+    
+    .react:hover img {
+      filter: none;
+    }
+    
+    .php {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 280px;
+      cursor: pointer;
+    }
+    
+    .php img {
+      width: 10%;
+      height: 10%;
+      filter: invert(91%) sepia(5%) saturate(45%) hue-rotate(131deg) brightness(89%) contrast(90%);
+    }
+    
+    .php:hover img {
+      filter: none;
+    }
+    
+    /* testimonial */
+    .testimonial-section{
+      background-color: #f2f7ff;
+      padding: 20px;
+    }
+    
+    .text-t h2 {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .testimonial-content {
+      background-color: #ffffff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .testimonial-name {
+      font-size: 18px;
+      color: #333333;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .testimonial-description {
+      font-size: 14px;
+      color: #666666;
+      margin-bottom: 10px;
+    }
+
+    .social-media-icons {
+      display: flex;
+      justify-content: center;
+    }
+
+    .social-media-icons a {
+      display: inline-block;
+      margin: 0 5px;
+      color: #333333;
+      font-size: 20px;
+    }
+
+    /* Contact section styles */
+    .contact-section {
+      background-color: #f7f7f7;
+      padding: 50px;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .contact-section form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-section form input,
+    .contact-section form textarea,
+    .contact-section form button {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #dddddd;
+      border-radius: 5px;
+    }
+
+    .contact-section form textarea {
+      height: 100px;
+    }
+
+    .contact-section form button {
+      background-color: #333333;
+      color: #ffffff;
+      cursor: pointer;
+    }
+    
+    .sentmessage {
+      background-color: #f2f7ff;
+      width: 50%;
+      height: 50%;
+    }
+
+    /* Footer styles */
+    .footer {
+      padding: 20px;
+      text-align: center;
+      background-color: #333333;
+      color: #ffffff;
+    }
+    
+    /*Dark Mode*/
+    
+    /* Media queries */
+    @media (max-width: 768px) {
+      .navbar ul {
+        display: none;
+      }
+
+      .navbar.active ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ffffff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar.active ul li {
+        margin: 10px 0;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .typing-container h1 {
+        font-size: 24px;
+      }
+    }
+
+    /* Custom styles */
+    /* Add your custom styles here */
+
+  </style>
 </head>
+
 <body>
-    <h2>Form Kirim Email</h2>
-    <form action="send_email.php" method="post">
-        <label for="name">Nama:</label>
-        <input type="text" id="name" name="name" required><br><br>
+  <nav id="navbar" class="navbar">
+    <div class="logo">
+      <h2>Mr.Programmer</h2>
+    </div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#testimoni">Testimonial</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </nav>
 
-        <label for="user_email">Email Pengguna:</label>
-        <input type="email" id="user_email" name="user_email" required><br><br>
+  <section id="home" class="typing-container">
+    <img class="img" src="logo.png" alt="3d.png">
+    <h1>Hello, I'm Mr. Programmer</h1>
+    <button onclick="scrollToSection('#about')">Start</button>
+  </section>
 
-        <label for="message">Pesan:</label>
-        <textarea id="message" name="message" required></textarea><br><br>
+  <section id="about" class="about-section">
+    <h2>About</h2>
+    <p>Mr. Programmer menyediakan layanan lengkap untuk pengembangan web, termasuk website siap pakai, perbaikan kode, penjualan source code, dan kelas pemrograman untuk pemula. Kami hadir untuk memudahkan Anda mengembangkan website berkualitas dan belajar pemrograman dari dasar dengan panduan praktis dan terpercaya.</p>
+  </section>
+  
+  <section id="projects" class="project-section">
+    <h2>Projects</h2>
+    <div class="project-box" onclick="openPopup(1)">
+      <img src="project.jpg" alt="Project 1">
+      <h3>Project 1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+    <div class="project-box" onclick="openPopup(2)">
+      <img src="project.jpg" alt="Project 2">
+      <h3>Project 2</h3>
+    </div>
+    <div class="project-box" onclick="openPopup(3)">
+      <img src="project.jpg" alt="Project 3">
+      <h3>Project 3</h3>
+    </div>
+  </section>
 
-        <button type="submit">Kirim Email</button>
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <div id="projectDetails">
+        <!-- Detail proyek akan ditambahkan dinamis di sini -->
+      </div>
+    </div>
+  </div>
+
+  <section id="skills" class="skill-section">
+    <h2>Skills</h2>
+    <div class="logo">
+      <div class="html">
+        <img src="html.svg.png" alt="html" />
+       <p>HTML adalah fondasi dari setiap website yang saya buat. Dengan pemahaman yang kuat dalam HTML, saya dapat membangun struktur halaman yang rapi dan semantik, memungkinkan konten untuk mudah dibaca dan diindeks oleh mesin pencari.</p>  
+      </div>
+      <div class="tailwind">
+        <img src="tailwind.com.png" alt="tailwind" />
+        <p>Menggunakan Tailwind CSS, saya mampu mengembangkan desain yang modern dan responsif dengan efisien. Tailwind memungkinkan saya untuk menata antarmuka dengan fleksibel dan mempercepat proses desain melalui pendekatan utility-first.</p>
+      </div>
+      <div class="react">
+        <img src="React.svg.png" alt="tailwind" />
+        <p>React adalah framework yang saya gunakan untuk membangun antarmuka pengguna yang dinamis dan interaktif. Dengan React, saya bisa membuat komponen yang efisien, mudah di-maintain, dan mampu menghadirkan pengalaman pengguna yang optimal.</p>
+      </div>
+      <div class="php">
+        <img src="PHP.svg.png" alt="tailwind" />
+        <p>PHP memungkinkan saya untuk membangun backend yang kuat untuk aplikasi web. Dengan PHP, saya dapat menangani logika server-side, menghubungkan aplikasi ke basis data, serta mengelola berbagai aspek fungsionalitas yang dibutuhkan dalam aplikasi dinamis.</p>
+      </div>
+    </div>
+  </section>
+
+<section id="testimoni" class="testimonial-section">
+  <div class="text-t">
+    <h2>Testimonial</h2>
+  </div>
+  <div class="testimonial-container" id="testimoni">
+    <div class="testimonial-content">
+      <img class="testimonial-image" src="profile.jpg" alt="John Doe">
+      <div class="testimonial-name">John Doe</div>
+      <div class="testimonial-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tristique faucibus justo, at iaculis tortor interdum sed."</div>
+      <div class="social-media-icons">
+        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-container">
+    <div class="testimonial-content">
+      <img class="testimonial-image" src="profile.jpg" alt="Jane Smith">
+      <div class="testimonial-name">Jane Smith</div>
+      <div class="testimonial-description">"Duis fringilla magna et velit euismod, sed suscipit metus aliquam. Mauris non metus in dui commodo fringilla."</div>
+      <div class="social-media-icons">
+        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonial-container">
+    <div class="testimonial-content">
+      <img class="testimonial-image" src="profile.jpg" alt="David Johnson">
+      <div class="testimonial-name">David Johnson</div>
+      <div class="testimonial-description">"Vivamus dictum neque sit amet purus tempus, sit amet eleifend risus aliquet. Suspendisse nec felis tincidunt, lobortis erat non, auctor mauris."</div>
+      <div class="social-media-icons">
+        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section id="contact" class="contact-section">
+    <h2>Contact</h2>
+    <form id="contactForm">
+      <input id="name" type="text" name="name" placeholder="Your Name" required>
+      <input id="email" type="email" name="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button id="submit" type="submit">Send Message</button>
     </form>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2023 Mr.Programmer</p>
+  </footer>
+
+  <script>
+    // Toggle mobile menu
+    function toggleMenu() {
+      const navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('active');
+    }
+
+    // Scroll to section
+    function scrollToSection(sectionId) {
+      const section = document.querySelector(sectionId);
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+  
+  <script>
+    var projectDetails = {
+      1: {
+        title: "Project 1",
+        description: "Ini adalah penjelasan proyek 1."
+      },
+      2: {
+        title: "Project 2",
+        description: "Ini adalah penjelasan proyek 2."
+      },
+      3: {
+        title: "Project 3",
+        description: "Ini adalah penjelasan proyek 3."
+      }
+    };
+
+    // Show project popup
+    function openPopup(projectId) {
+      var popup = document.getElementById('popup');
+      var projectDetail = projectDetails[projectId];
+      var projectDetailsContainer = document.getElementById('projectDetails');
+
+      // Hapus konten sebelumnya jika ada
+      projectDetailsContainer.innerHTML = '';
+
+      // Buat elemen untuk judul proyek
+      var titleElement = document.createElement('h3');
+      titleElement.innerText = projectDetail.title;
+
+      // Buat elemen untuk deskripsi proyek
+      var descriptionElement = document.createElement('p');
+      descriptionElement.innerText = projectDetail.description;
+
+      // Tambahkan elemen ke dalam kontainer detail proyek
+      projectDetailsContainer.appendChild(titleElement);
+      projectDetailsContainer.appendChild(descriptionElement);
+
+      popup.style.display = 'block';
+    }
+
+    // Hide project popup
+    function closePopup() {
+      var popup = document.getElementById('popup');
+      popup.style.display = 'none';
+    }
+  </script>
+  <script>
+      const circles = document.querySelectorAll('.circle');
+circles.forEach(elem => {
+    var dots = elem.getAttribute('data-dots')
+    var marked = elem.getAttribute('data-percent');
+    var percent = Math.floor(dots * marked / 100);
+    var rotate = 360 / dots;
+    var points = "";
+    for (let i = 0; i < dots; i++) {
+        points += `<div class="points" style="--i: ${i}; --rot: ${rotate}deg"></div>`;
+    }
+    elem.innerHTML = points;
+    const pointsMarked = elem.querySelectorAll('.points');
+    for (let i = 0; i < percent; i++) {
+        pointsMarked[i].classList.add('marked')
+    }
+})
+    </script>
+      <script>
+      //scroll transparent navbar
+    window.addEventListener("scroll", function () {
+      var navbar = document.getElementById("navbar");
+      if (window.scrollY > 0) {
+        navbar.classList.add("transparent");
+      } else {
+        navbar.classList.remove("transparent");
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+        emailjs.init("6VZ09VpJKRpVlD8qY"); // Ganti dengan User ID dari EmailJS
+    })();
+
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Mencegah submit form secara default
+        
+        // Ambil data dari form
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        // Kirim email ke email Anda sendiri
+        emailjs.send("service_n9yfctp", "template_uoikvbs", {
+            from_name: name,
+            from_email: email,
+            message: message,
+            to_email: "frsgaming589@gmail.com" // Ganti dengan email Anda sendiri
+        }).then(function(response) {
+            console.log("Pesan berhasil dikirim ke email Anda.");
+        }, function(error) {
+            console.error("Gagal mengirim pesan ke email Anda:", error);
+        });
+
+        // Kirim email konfirmasi ke email pengguna
+        emailjs.send("service_n9yfctp", "template_p6v424s", {
+            from_name: "Mr.Programmer", // Nama Anda atau perusahaan Anda
+            to_name: name,
+            to_email: email,
+            message: "Terima kasih telah menghubungi kami! Kami telah menerima pesan Anda dan akan segera merespons."
+        }).then(function(response) {
+            alert("Pesan berhasil dikirim!");
+        }, function(error) {
+            alert("Pesan gagal dikirim. Coba lagi.");
+            console.error("Error:", error);
+        });
+    });
+</script>
+  <!--<script>
+  function SendEmail(){
+        Email.send({
+          SecureToken : "68fbbd6a-0008-4df3-8460-36cf1f4d1921",
+          To : 'frsgaming589@gmail.com',
+          From : "frsgaming589@gmail.com",
+          Subject : document.getElementById("message").value,
+          Body : "<div class='sentmessage'>"
+          + "<h1>Data Message</h1>"
+          + "Name: " + document.getElementById("name").value
+          + "<br> Email: " + document.getElementById("email").value
+          + "<br> Message: " + document.getElementById("message").value
+          + "</div>"
+        }).then(
+        message => alert(message)
+        );
+  }
+  </script>-->
 </body>
 </html>

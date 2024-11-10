@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+</head>
+<body>
+    <h2>Contact Us</h2>
+    <form id="contactForm" action="send_email.php" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+        <br>
+        <button type="submit">Send Message</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <!--<script>
+        (function(){
+            emailjs.init("6VZ09VpJKRpVlD8qY"); // Ganti dengan User ID dari EmailJS
+        })();
+
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah submit form secara default
+            
+            // Ambil data dari form
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+
+            // Kirim email menggunakan EmailJS
+            emailjs.send("service_n9yfctp", "template_uoikvbs", {
+                from_name: name,
+                from_email: email,
+                message: message
+            }).then(function(response) {
+                alert("Pesan berhasil dikirim!");
+            }, function(error) {
+                alert("Pesan gagal dikirim. Coba lagi.");
+                console.error("Error:", error);
+            });
+        });
+    </script>-->
+    <script>
+    (function(){
+        emailjs.init("6VZ09VpJKRpVlD8qY"); // Ganti dengan User ID dari EmailJS
+    })();
+
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Mencegah submit form secara default
+        
+        // Ambil data dari form
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        // Kirim email ke email Anda sendiri
+        emailjs.send("service_n9yfctp", "template_uoikvbs", {
+            from_name: name,
+            from_email: email,
+            message: message,
+            to_email: "frsgaming589@gmail.com" // Ganti dengan email Anda sendiri
+        }).then(function(response) {
+            console.log("Pesan berhasil dikirim ke email Anda.");
+        }, function(error) {
+            console.error("Gagal mengirim pesan ke email Anda:", error);
+        });
+
+        // Kirim email konfirmasi ke email pengguna
+        emailjs.send("service_n9yfctp", "template_p6v424s", {
+            from_name: "Mr.Programmer", // Nama Anda atau perusahaan Anda
+            to_name: name,
+            to_email: email,
+            message: "Terima kasih telah menghubungi kami! Kami telah menerima pesan Anda dan akan segera merespons."
+        }).then(function(response) {
+            alert("Pesan berhasil dikirim!");
+        }, function(error) {
+            alert("Pesan gagal dikirim. Coba lagi.");
+            console.error("Error:", error);
+        });
+    });
+</script>
+</body>
+</html>

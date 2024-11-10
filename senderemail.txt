@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Notification</title>
+    <style>
+        /* Reset and basic styling */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #003399;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header img {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .content p {
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            color: #ffffff;
+            background-color: #0078D7;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .footer {
+            background-color: #f4f4f9;
+            color: #555;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .footer a {
+            color: #003399;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="email-container">
+    <!-- Header -->
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Bank_Rakyat_Indonesia_logo.svg/1200px-Bank_Rakyat_Indonesia_logo.svg.png" alt="Bank BRI Logo">
+        <div>Bank BRI</div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <p>Halo, [Nama Pengguna],</p>
+
+        <p>Kami ingin menginformasikan bahwa telah terjadi aktivitas pada akun Anda. Silakan tinjau detailnya di bawah ini:</p>
+
+        <p><strong>Jenis Aktivitas:</strong> Transfer Dana<br>
+           <strong>Waktu:</strong> [Tanggal dan Waktu]<br>
+           <strong>Jumlah:</strong> Rp [Jumlah Transfer]<br>
+           <strong>Tujuan:</strong> [Rekening Tujuan]</p>
+
+        <p>Jika Anda tidak mengenali transaksi ini, segera hubungi layanan pelanggan kami atau kunjungi kantor cabang terdekat untuk informasi lebih lanjut.</p>
+
+        <a href="#" class="cta-button">Lihat Detail Transaksi</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Email ini dikirim secara otomatis. Mohon tidak membalas email ini.</p>
+        <p>Bank BRI<br>
+        Jalan Jenderal Sudirman No.Kav 44-46, Jakarta 10210</p>
+        <p>Hubungi kami: <a href="tel:+6221-1500017">1500017</a> atau kunjungi <a href="https://bri.co.id">bri.co.id</a></p>
+    </div>
+</div>
+
+</body>
+</html>
